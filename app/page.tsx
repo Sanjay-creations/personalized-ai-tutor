@@ -13,20 +13,25 @@ import {
   CheckCircle2,
 } from "lucide-react";
 
+import ThemeToggle from "@/components/ThemeToggle";
+
 const roles = [
   {
     title: "School Student",
-    description: "Learn through games, AI, quizzes, stories and challenges.",
+    description:
+      "Learn through games, AI, quizzes, stories and challenges.",
     icon: GraduationCap,
   },
   {
     title: "College Student",
-    description: "Study smarter with AI, mock tests, roadmaps and analytics.",
+    description:
+      "Study smarter with AI, mock tests, roadmaps and analytics.",
     icon: Brain,
   },
   {
     title: "Teacher",
-    description: "Manage classes, materials, assignments and student progress.",
+    description:
+      "Manage classes, materials, assignments and student progress.",
     icon: Users,
   },
 ];
@@ -61,6 +66,24 @@ const features = [
 export default function Home() {
   const [selectedRole, setSelectedRole] = useState("");
 
+  function handleRoleSelection(roleTitle: string) {
+    setSelectedRole(roleTitle);
+
+    if (roleTitle === "School Student") {
+      window.location.href = "/signup?role=SCHOOL_STUDENT";
+      return;
+    }
+
+    if (roleTitle === "College Student") {
+      window.location.href = "/signup?role=COLLEGE_STUDENT";
+      return;
+    }
+
+    if (roleTitle === "Teacher") {
+      window.location.href = "/login";
+    }
+  }
+
   return (
     <main className="eduquest-page">
       {/* Navigation */}
@@ -78,6 +101,9 @@ export default function Home() {
           <a href="#how-it-works">How It Works</a>
           <a href="#roles">Who It's For</a>
         </div>
+
+        {/* Theme Toggle */}
+        <ThemeToggle />
 
         <button
           className="nav-button"
@@ -161,6 +187,7 @@ export default function Home() {
         <div className="hero-visual">
           <div className="floating-card card-top">
             <Brain size={20} />
+
             <div>
               <strong>AI Tutor</strong>
               <small>Ready to help</small>
@@ -215,6 +242,7 @@ export default function Home() {
 
           <div className="floating-card card-bottom">
             <Gamepad2 size={20} />
+
             <div>
               <strong>Game Challenge</strong>
               <small>Concept Puzzle</small>
@@ -226,7 +254,9 @@ export default function Home() {
       {/* Role selection */}
       <section className="roles-section" id="roles">
         <div className="section-heading">
-          <span className="section-label">CHOOSE YOUR EXPERIENCE</span>
+          <span className="section-label">
+            CHOOSE YOUR EXPERIENCE
+          </span>
 
           <h2>Who are you?</h2>
 
@@ -239,13 +269,18 @@ export default function Home() {
         <div className="roles-grid">
           {roles.map((role) => {
             const Icon = role.icon;
-            const isSelected = selectedRole === role.title;
+            const isSelected =
+              selectedRole === role.title;
 
             return (
               <button
                 key={role.title}
-                className={`role-card ${isSelected ? "selected" : ""}`}
-                onClick={() => setSelectedRole(role.title)}
+                className={`role-card ${
+                  isSelected ? "selected" : ""
+                }`}
+                onClick={() =>
+                  handleRoleSelection(role.title)
+                }
               >
                 <div className="role-icon">
                   <Icon size={28} />
@@ -267,18 +302,25 @@ export default function Home() {
         {selectedRole && (
           <div className="selection-message">
             <CheckCircle2 size={20} />
+
             <span>
-              You selected <strong>{selectedRole}</strong>. Your personalized
-              EDUQUEST experience will be built around this role.
+              You selected{" "}
+              <strong>{selectedRole}</strong>. Redirecting
+              you to the appropriate account page...
             </span>
           </div>
         )}
       </section>
 
       {/* Features */}
-      <section className="features-section" id="features">
+      <section
+        className="features-section"
+        id="features"
+      >
         <div className="section-heading">
-          <span className="section-label">THE EDUQUEST ECOSYSTEM</span>
+          <span className="section-label">
+            THE EDUQUEST ECOSYSTEM
+          </span>
 
           <h2>More than a learning platform.</h2>
 
@@ -293,7 +335,10 @@ export default function Home() {
             const Icon = feature.icon;
 
             return (
-              <div className="feature-card" key={feature.title}>
+              <div
+                className="feature-card"
+                key={feature.title}
+              >
                 <div className="feature-icon">
                   <Icon size={25} />
                 </div>
@@ -308,9 +353,14 @@ export default function Home() {
       </section>
 
       {/* How it works */}
-      <section className="how-section" id="how-it-works">
+      <section
+        className="how-section"
+        id="how-it-works"
+      >
         <div className="section-heading">
-          <span className="section-label">HOW IT WORKS</span>
+          <span className="section-label">
+            HOW IT WORKS
+          </span>
 
           <h2>Your learning journey.</h2>
 
@@ -324,8 +374,12 @@ export default function Home() {
           <div className="journey-step">
             <span>01</span>
             <Sparkles size={26} />
+
             <h3>Choose</h3>
-            <p>Choose your subject, topic and preferred learning method.</p>
+
+            <p>
+              Choose your subject, topic and preferred learning method.
+            </p>
           </div>
 
           <div className="journey-line" />
@@ -333,8 +387,12 @@ export default function Home() {
           <div className="journey-step">
             <span>02</span>
             <Brain size={26} />
+
             <h3>Learn</h3>
-            <p>Learn concepts with AI explanations, materials and examples.</p>
+
+            <p>
+              Learn concepts with AI explanations, materials and examples.
+            </p>
           </div>
 
           <div className="journey-line" />
@@ -342,8 +400,12 @@ export default function Home() {
           <div className="journey-step">
             <span>03</span>
             <Gamepad2 size={26} />
+
             <h3>Play</h3>
-            <p>Practice your knowledge through quizzes and learning games.</p>
+
+            <p>
+              Practice your knowledge through quizzes and learning games.
+            </p>
           </div>
 
           <div className="journey-line" />
@@ -351,8 +413,12 @@ export default function Home() {
           <div className="journey-step">
             <span>04</span>
             <Trophy size={26} />
+
             <h3>Grow</h3>
-            <p>Track your progress and keep improving with every challenge.</p>
+
+            <p>
+              Track your progress and keep improving with every challenge.
+            </p>
           </div>
         </div>
       </section>
@@ -361,7 +427,9 @@ export default function Home() {
       <section className="final-cta">
         <div className="final-cta-inner">
           <div>
-            <span className="section-label">YOUR NEXT ADVENTURE STARTS HERE</span>
+            <span className="section-label">
+              YOUR NEXT ADVENTURE STARTS HERE
+            </span>
 
             <h2>Make learning feel like a journey.</h2>
 
@@ -398,7 +466,9 @@ export default function Home() {
           LEARN YOUR WAY. PLAY TO UNDERSTAND. GROW WITH EVERY CHALLENGE.
         </p>
 
-        <span className="copyright">© 2026 EDUQUEST</span>
+        <span className="copyright">
+          © 2026 EDUQUEST
+        </span>
       </footer>
     </main>
   );
